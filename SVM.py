@@ -6,26 +6,25 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.svm import SVC
 from matplotlib.colors import ListedColormap
 
-# Load data
+
 data = pd.read_csv('User_Data.csv')
 
-# Select features and target
-X = data.iloc[:, [2, 3]].values  # Age and EstimatedSalary
-y = data.iloc[:, 4].values       # Purchased
+X = data.iloc[:, [2, 3]].values  
+y = data.iloc[:, 4].values       
 
-# Split
+
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=0)
 
-# Scale features
+
 sc = StandardScaler()
 X_train = sc.fit_transform(X_train)
 X_test = sc.transform(X_test)
 
-# Train SVM
+
 model = SVC(kernel='linear', random_state=0)
 model.fit(X_train, y_train)
 
-# Visualization - Training set
+
 X_set, y_set = X_train, y_train
 X1, X2 = np.meshgrid(
     np.arange(start=X_set[:, 0].min() - 1, stop=X_set[:, 0].max() + 1, step=0.01),
