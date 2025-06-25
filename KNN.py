@@ -6,19 +6,19 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import LabelEncoder
 from matplotlib.colors import ListedColormap
 
-# Load data
+
 data = pd.read_csv('IRIS.csv')
-X = data.iloc[:, :2].values  # only first 2 features for plotting
+X = data.iloc[:, :2].values 
 y = LabelEncoder().fit_transform(data.iloc[:, -1].values)
 
-# Split
+
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-# Train model
+
 model = KNeighborsClassifier(n_neighbors=3)
 model.fit(X_train, y_train)
 
-# Plot boundary
+
 X_set, y_set = X_train, y_train
 X1, X2 = np.meshgrid(
     np.arange(start=X_set[:, 0].min() - 1, stop=X_set[:, 0].max() + 1, step=0.01),
