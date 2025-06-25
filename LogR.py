@@ -7,26 +7,25 @@ from sklearn.decomposition import PCA
 from matplotlib.colors import ListedColormap
 import numpy as np
 
-# Load dataset
+
 data = pd.read_csv('IRIS.csv')
 
-# Prepare input and label
+
 X = data.iloc[:, :-1].values
 y = LabelEncoder().fit_transform(data.iloc[:, -1].values)
 
-# Split
+
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# Train model
+
 model = LogisticRegression()
 model.fit(X_train, y_train)
 
-# PCA for visualization (2D)
 pca = PCA(n_components=2)
 X_train_pca = pca.fit_transform(X_train)
 X_test_pca = pca.transform(X_test)
 
-# Function to draw decision boundary
+
 def plot_boundary(X_set, y_set, title):
     X1, X2 = np.meshgrid(
         np.arange(start=X_set[:, 0].min()-1, stop=X_set[:, 0].max()+1, step=0.01),
